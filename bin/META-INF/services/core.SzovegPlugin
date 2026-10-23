@@ -1,0 +1,5 @@
+plugins.WordCountPlugin
+plugins.UppercasePlugin
+plugins.AccentlessPlugin
+plugins.PalindromePlugin
+plugins.CaesarPlugin
