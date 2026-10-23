@@ -5,7 +5,7 @@ import core.TextPlugin;
 public class CaesarPlugin implements TextPlugin {
     @Override 
     public String name() {
-        return "Caesar";
+        return "caesar";
     }    
 
     @Override 

@@ -5,7 +5,7 @@ import core.TextPlugin;
 public class WordCountPlugin implements TextPlugin {
     @Override
     public String name() {
-        return "Counts";
+        return "counts";
     }
 
     @Override 

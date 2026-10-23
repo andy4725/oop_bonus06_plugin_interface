@@ -6,7 +6,7 @@ import java.util.Locale;
 public class UppercasePlugin implements TextPlugin {
     @Override 
     public String name() {
-        return "Uppercase";
+        return "uppercase";
     }
 
     @Override 

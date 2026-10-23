@@ -6,7 +6,7 @@ import java.text.Normalizer;
 public class AccentlessPlugin implements TextPlugin {
     @Override
     public String name() {
-        return "Accentless";
+        return "accentless";
     }
 
     @Override

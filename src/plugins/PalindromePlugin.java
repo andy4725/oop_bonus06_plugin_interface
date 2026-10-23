@@ -8,7 +8,7 @@ import java.util.Locale;
 public class PalindromePlugin implements TextPlugin {
     @Override
     public String name() {
-        return "Palindrome";
+        return "palindrome";
     }
 
     @Override
