@@ -15,32 +15,39 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// Verifies the behavior of each built-in plugin and the plugin pipeline.
 public class PluginTests {
+    // Checks that whitespace-separated words are counted.
     @Test
     void wordCountCountsWords() {
         assertEquals("3", new WordCountPlugin().process("one two three"));
     }
 
+    // Checks that text is converted to uppercase.
     @Test
     void uppercaseConvertsText() {
         assertEquals("HELLO", new UppercasePlugin().process("Hello"));
     }
 
+    // Checks that accented characters are converted to their unaccented forms.
     @Test
     void accentlessRemovesAccents() {
         assertEquals("arvizturo", new AccentlessPlugin().process("árvíztűrő"));
     }
 
+    // Checks that palindrome words are found in a sentence.
     @Test
     void palindromePluginFindsPalindromeWords() {
         assertEquals("radar", new PalindromePlugin().process("hello radar world"));
     }
 
+    // Checks that the Caesar shift wraps correctly and preserves punctuation.
     @Test
     void caesarShiftsLetters() {
         assertEquals("def XYZ!", new CaesarPlugin().process("abc UVW!"));
     }
 
+    // Checks that each plugin receives the previous plugin's output.
     @Test
     void pipelineRunsPluginsInOrder() {
         Map<String, TextPlugin> plugins = new LinkedHashMap<>();
@@ -55,6 +62,7 @@ public class PluginTests {
         );
     }
 
+    // Checks that a failing plugin is skipped and later plugins still run.
     @Test
     void failedPluginIsSkippedAndNextPluginRuns() {
         Map<String, TextPlugin> plugins = new LinkedHashMap<>();

@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
 
+// Parses command-line options, loads plugins, and runs the requested text pipeline.
 public class App {
+    // Starts the application and reports command-line or input errors.
     public static void main(String[] args) {
         try {
             run(args);
@@ -22,11 +24,13 @@ public class App {
         }
     }
 
+    // Reads options, selects plugins, and routes the result to the console or a file.
     private static void run(String[] args) throws IOException {
         List<String> requestedPlugins = new ArrayList<>();
         String inputFile = null;
         String outputFile = null;
 
+        // Collect the requested plugins and optional input/output file paths.
         for (int i = 0; i < args.length; i++) {
             switch (args[i]) {
                 case "--plugin":
@@ -63,6 +67,7 @@ public class App {
             }
         }
 
+        // Discover plugins before building the pipeline that will execute them.
         Map<String, TextPlugin> plugins = loadPlugins();
         PluginPipeline pipeline = new PluginPipeline(plugins);
 
@@ -72,6 +77,7 @@ public class App {
             );
         }
 
+        // Read the input, apply plugins in order, and write the processed text.
         String input = readInput(inputFile);
         String output = pipeline.process(input, requestedPlugins);
 
@@ -82,6 +88,7 @@ public class App {
         }
     }
 
+    // Uses the service registration file to discover available plugin implementations.
     private static Map<String, TextPlugin> loadPlugins() {
         Map<String, TextPlugin> plugins = new LinkedHashMap<>();
 
@@ -92,6 +99,7 @@ public class App {
         return plugins;
     }
 
+    // Prints each discovered plugin's command name and description.
     private static void listPlugins() {
         Map<String, TextPlugin> plugins = loadPlugins();
 
@@ -100,6 +108,7 @@ public class App {
         }
     }
 
+    // Reads all text from the named file, or from standard input when no file is given.
     private static String readInput(String inputFile) throws IOException {
         if (inputFile != null) {
             return Files.readString(Path.of(inputFile));
